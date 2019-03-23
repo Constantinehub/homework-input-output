@@ -1,18 +1,31 @@
 <div class="activity_box">
   <div class="scrollbar" id="style-2">
-    <div class="activity-row" *ngFor="let hotel of hotels" (click)="this.selectHotel(hotel)">
-      <div class="activity-desc">
-        <h5>{{hotel.title}}</h5>
-        <p>{{hotel.description}}</p>
-        <p>{{hotel.address}}</p>
-        <h6>Tel: {{hotel.phone}}</h6>
-      </div>
-      <div class="activity-img" *ngIf="hotel.photos">
-        <ul>
-          <li><img *ngFor="let photo of hotel.photos" [src]="photo"  alt=""/></li>
-        </ul>
-      </div>
-      <div class="clear"> </div>
+    <div class="loader" *ngIf="isLoading; else hotelsBlock">
+      <img src="../../../assets/preloader.gif" alt="">
     </div>
+    <ng-template #hotelsBlock>
+      <div class="activity-row"
+           *ngFor="let hotel of hotels | filter: searchText : starAmount"
+           (click)="selectHotel(hotel)"
+           [ngClass]="{'row-active': currentHotel === hotel.id}"
+      >
+        <div class="activity-desc">
+          <h5>{{hotel.title}}</h5>
+          <div>Stars: <span class="stars">{{hotel.stars}}</span></div>
+          <p>{{hotel.description}}</p>
+          <p>{{hotel.address}}</p>
+          <h6>Tel: {{hotel.phone}}</h6>
+        </div>
+        <div class="activity-img">
+          <ul *ngIf="hotel.photos">
+            <li *ngFor="let photo of hotel.photos">
+              <img [src]="photo"  alt=""/>
+            </li>
+          </ul>
+          <button class="favorite-btn" (click)="pushBtn($event, hotel)">+ Add To Favorites</button>
+        </div>
+        <div class="clear"> </div>
+      </div>
+    </ng-template>
   </div>
 </div>

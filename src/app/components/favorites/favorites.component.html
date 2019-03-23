@@ -1,0 +1,9 @@
+<div class="favorites">
+  <div class="inner">Favorite Hotels: {{favoritesList.length}}</div>
+  <ul class="favorite-list" *ngIf="favoritesList.length > 0">
+    <li *ngFor="let hotel of favoritesList; index as i">
+      {{hotel.title}}
+      <button class="delete" (click)="removeFromFavorites(i)">X</button>
+    </li>
+  </ul>
+</div>

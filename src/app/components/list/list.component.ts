@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {IHotel} from '../../models/hotel.model';
 
 @Component({
   selector: 'app-list',
@@ -7,20 +8,32 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class ListComponent implements OnInit {
   public title = 'Righteous indignation & like';
-  public hotel: object;
+  public isLoading = true;
 
-  @Input() public hotels;
-  @Output() public hotelSelected: EventEmitter<object> = new EventEmitter();
+  @Input() public hotels: IHotel[];
+  @Input() public currentHotel: IHotel;
+  @Input() public searchText: string;
+  @Input() public starAmount: number;
+  @Input() public favoritesList: IHotel;
+  @Output() public hotelSelected: EventEmitter<IHotel> = new EventEmitter();
+  @Output() public addToFavorite: EventEmitter<any> = new EventEmitter();
 
   constructor() {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
   }
 
-  public selectHotel(event) {
+  public selectHotel(event: IHotel) {
     this.hotelSelected.emit(event);
-    return this.hotel = event;
+  }
+
+  public pushBtn(event, hotel) {
+    this.addToFavorite.emit(hotel);
+    event.stopPropagation();
   }
 
 }

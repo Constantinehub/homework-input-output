@@ -1,7 +1,12 @@
 <div class="temperatur">
   <h5>{{title}}</h5>
   <span class="w-line"> </span>
-  <span class="cloud"> </span>
-  <h2>{{currentHotel.weather.temperature}} <sup class="degree">°</sup></h2>
-  <h6>Water {{currentHotel.weather.wind}}<sup class="degree">°</sup></h6>
+  <ul class="weather-icon">
+    <li *ngIf="currentHotel.icon === 'cloud'"><img src="../../../assets/ic_cloud.svg" alt=""></li>
+    <li *ngIf="currentHotel.icon === 'frost'"><img src="../../../assets/ic_frost.svg" alt=""></li>
+    <li *ngIf="currentHotel.icon === 'rain'"><img src="../../../assets/ic_rain.svg" alt=""></li>
+    <li *ngIf="currentHotel.icon === 'sun'"><img src="../../../assets/ic_sun.svg" alt=""></li>
+  </ul>
+  <h2>{{currentHotel.temperature}} <sup class="degree">°</sup></h2>
+  <h6>Water {{currentHotel.wind}}<sup class="degree">°</sup></h6>
 </div>

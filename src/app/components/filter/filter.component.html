@@ -1,0 +1,7 @@
+<div class="filter">
+  <input type="text" placeholder="enter your request" (input)="search($event)">
+</div>
+<ul>
+  <li (click)="sortByStars(starDefault)">All stars</li>
+  <li *ngFor="let star of stars" (click)="sortByStars(star)">{{star}} star</li>
+</ul>

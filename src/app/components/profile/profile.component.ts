@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {IProfile} from '../../models/hotel.model';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   public title = 'Nam libero voluptatem';
-  @Input() currentHotel: object;
+  @Input() currentHotel: IProfile[];
 
   constructor() { }
 

@@ -1,28 +1,36 @@
-<h1>Hot Weather Widget</h1>
+<h1>{{ header }}</h1>
 <div class="element">
   <div class="element-left">
-    <div class="element-bg-img">
+    <div class="element-bg-img" (click)="getModal()">
       <img [src]="currentHotel?.picture" alt="" class="img-responsive">
     </div>
     <div class="element-left-bottom">
       <div class="ele-strip">
-        <ul>
-          <li><a href="index.html#">Hotel</a></li>
-          <li><a href="index.html#">Fishing</a></li>
-          <li><a href="index.html#">Tours</a></li>
-          <li class="anc-bor"><a href="index.html#">Weather</a></li>
-        </ul>
+        <app-filter
+          [hotels]="hotels"
+          (searchRequest)="searchText($event)"
+          (starAmount)="starCatch($event)">
+        </app-filter>
       </div>
       <div class="village">
         <h3>{{title}}</h3>
         <span class="line"> </span>
-        <app-list [hotels]="hotels" (hotelSelected)="this.getHotel($event)"></app-list>
+        <app-list
+          [hotels]="hotels"
+          [currentHotel]="currentHotel.id"
+          [searchText]="text"
+          [starAmount]="stars"
+          [favoritesList]="favoritesList"
+          (hotelSelected)="getHotel($event)"
+          (addToFavorite)="favoriteHotel($event)"
+        ></app-list>
       </div>
     </div>
   </div>
   <div class="element-right">
-    <app-weather [currentHotel]="currentHotel"></app-weather>
-    <app-profile [currentHotel]="currentHotel"></app-profile>
+    <app-weather [currentHotel]="currentHotel.weather"></app-weather>
+    <app-profile [currentHotel]="currentHotel.profile"></app-profile>
+    <app-favorites [favoritesList]="favoritesList"></app-favorites>
   </div>
   <div class="clear"> </div>
 </div>
