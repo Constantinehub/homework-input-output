@@ -8,7 +8,7 @@
            *ngFor="let hotel of hotels | filter: searchText : starAmount"
            (click)="selectHotel(hotel)"
            [ngClass]="{'row-active': currentHotel === hotel.id}"
-      >
+    >
         <div class="activity-desc">
           <h5>{{hotel.title}}</h5>
           <div>Stars: <span class="stars">{{hotel.stars}}</span></div>

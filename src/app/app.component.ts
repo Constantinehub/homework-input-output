@@ -1,8 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IHotel} from './models/hotel.model';
 import Hotels from './utils/mockedHotels.js';
-import { ModalComponent } from './components/modal/modal.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {MatSnackBar} from '@angular/material';
+import { RequestService } from './services/request.service';
+import {Observable} from 'rxjs';
+import {NotificationComponent} from './components/notification/notification.component';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +12,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   public header = 'Hot Weather Widget';
   public title = 'Righteous indignation & like';
+
+  public hotels$: Observable<IHotel[]>;
   public hotels: IHotel[] = Hotels;
   private initialHotel = this.hotels[0];
   public currentHotel = this.initialHotel;
@@ -20,7 +24,13 @@ export class AppComponent {
   public stars = '';
   public favoritesList: IHotel[] = [];
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    private snackBar: MatSnackBar,
+    private requestService: RequestService
+  ) {}
+
+  public ngOnInit(): void {
+    this.hotels$ = this.requestService.getHotels();
   }
 
   public getHotel(event: IHotel) {
@@ -35,16 +45,19 @@ export class AppComponent {
     this.stars = event;
   }
 
-  public getModal(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {});
-  }
-
   public favoriteHotel(hotel: IHotel) {
     if (this.favoritesList.indexOf(hotel) === -1) {
       this.favoritesList.push(hotel);
     } else {
       console.log('element already added');
     }
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(NotificationComponent, {
+      duration: 3000,
+      announcementMessage: 'tst'
+    });
   }
 
 }

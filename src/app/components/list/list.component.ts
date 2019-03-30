@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IHotel} from '../../models/hotel.model';
+import {RequestService} from '../../services/request.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -18,13 +20,12 @@ export class ListComponent implements OnInit {
   @Output() public hotelSelected: EventEmitter<IHotel> = new EventEmitter();
   @Output() public addToFavorite: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;
-    }, 2000);
+    }, 500);
   }
 
   public selectHotel(event: IHotel) {

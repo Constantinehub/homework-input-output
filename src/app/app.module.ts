@@ -13,6 +13,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -23,15 +25,18 @@ import { ModalComponent } from './components/modal/modal.component';
     FilterComponent,
     FilterPipe,
     FavoritesComponent,
-    ModalComponent
+    ModalComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [NotificationComponent]
 })
 export class AppModule { }

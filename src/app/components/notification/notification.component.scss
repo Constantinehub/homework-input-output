@@ -1,0 +1,9 @@
+.notification {
+  color: deeppink;
+  font-weight: bold;
+  &:after {
+    content: '✔';
+    color: greenyellow;
+    margin-left: 5px;
+  }
+}
